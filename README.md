@@ -10,6 +10,9 @@ Contains three parts:
  
 In fact, the core function is onehot encoding for machine-learning.
 
+## Dependency:
+No dependency, pure c code.
+
 ## Example:
 
 #### Before onehot encoding:  
@@ -26,7 +29,7 @@ In fact, the core function is onehot encoding for machine-learning.
  
 ## Build and Test:
 > make clean  
-> make -j2
+> make -j2  
 > cd test  
 > ./test-checker.sh  
 > ./test-onehot.sh  
