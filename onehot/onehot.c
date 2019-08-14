@@ -46,8 +46,8 @@ void xsvt_oh_init_coder(xsvt_oh_coder c, size_t ncolumns)
 
 void xsvt_oh_free_coder(xsvt_oh_coder* _c)
 {
-    CRUDE_CHECK_PTR(_c, return);
-    CRUDE_CHECK_PTR(*_c, return);
+    BRUTE_CHECK_PTR(_c, return);
+    BRUTE_CHECK_PTR(*_c, return);
 
     xsvt_oh_coder c = *_c;
 
@@ -95,8 +95,8 @@ xsvt_oh_io xsvt_oh_create_io(const char* in_xsv,
                              const int has_header,
                              const int write_header)
 {
-    CRUDE_CHECK_PTR(in_xsv, return NULL);
-    CRUDE_CHECK_PTR(out_xsv, return NULL);
+    BRUTE_CHECK_PTR(in_xsv, return NULL);
+    BRUTE_CHECK_PTR(out_xsv, return NULL);
 
     xsvt_oh_io io = (xsvt_oh_io)xsvt_alloc(sizeof(struct __xsvt_oh_io__));
 
@@ -126,8 +126,8 @@ xsvt_oh_io xsvt_oh_create_io(const char* in_xsv,
 
 void xsvt_oh_release_io(xsvt_oh_io* _io)
 {
-    CRUDE_CHECK_PTR(_io, return);
-    CRUDE_CHECK_PTR(*_io, return);
+    BRUTE_CHECK_PTR(_io, return);
+    BRUTE_CHECK_PTR(*_io, return);
 
     xsvt_oh_io io = *_io;
     if (io->in_xsv) {
@@ -375,14 +375,14 @@ void xsvt_oh_show_vtypes(xsvt_oh_coder c)
 void xsvt_oh_show_mappings(xsvt_oh_coder c)
 {
     for (int i = 0; i < c->__ncol__; ++i) {
-        CRUDE_FPRINT("[DEBUG] Col-%d %-13s: ", i, c->__cnames__[i]);
+        BRUTE_FPRINT("[DEBUG] Col-%d %-13s: ", i, c->__cnames__[i]);
         if (c->__nt__[i]) {
             for (int j = 0; j < c->__nt__[i] && j < 5; ++j)
-                CRUDE_FPRINT("[%s]=>[%s]  ", c->__dvtable__[i][j], c->__01slices__[i][j]);
-            CRUDE_FPRINT("...\n");
+                BRUTE_FPRINT("[%s]=>[%s]  ", c->__dvtable__[i][j], c->__01slices__[i][j]);
+            BRUTE_FPRINT("...\n");
         }
         else {
-            CRUDE_FPRINT("%s\n", ((XSVT_CVT_INTEGER == c->__vtypes__[i]) ? "{INTEGER}" : "{FLOATING}"));
+            BRUTE_FPRINT("%s\n", ((XSVT_CVT_INTEGER == c->__vtypes__[i]) ? "{INTEGER}" : "{FLOATING}"));
         }
         fflush(stdout);
     }
@@ -394,8 +394,8 @@ void xsvt_oh_show_mappings(xsvt_oh_coder c)
 
 int xsvt_oh_analyze(const xsvt_oh_io io, xsvt_oh_coder c)
 {
-    CRUDE_CHECK_PTR(io, return EINVAL);
-    CRUDE_CHECK_PTR(c, return EINVAL);
+    BRUTE_CHECK_PTR(io, return EINVAL);
+    BRUTE_CHECK_PTR(c, return EINVAL);
     assert(0 == ferror(io->in_xsv));
 
     // First, check csv.
@@ -519,9 +519,9 @@ int xsvt_oh_analyze(const xsvt_oh_io io, xsvt_oh_coder c)
 
 int xsvt_oh_output(const xsvt_oh_io io, const xsvt_oh_coder c)
 {
-    CRUDE_CHECK_PTR(io, return EINVAL);
-    CRUDE_CHECK_PTR(io->out_xsv, return EINVAL);
-    CRUDE_CHECK_PTR(c, return EINVAL);
+    BRUTE_CHECK_PTR(io, return EINVAL);
+    BRUTE_CHECK_PTR(io->out_xsv, return EINVAL);
+    BRUTE_CHECK_PTR(c, return EINVAL);
 
     int err = 0;
     #pragma push_macro("dvc")
@@ -587,9 +587,9 @@ int xsvt_oh_encode(const char* in_xsv,
                    const int   has_header,
                    const int   write_header)
 {
-    CRUDE_CHECK_PTR(in_xsv,  return EINVAL);
-    CRUDE_CHECK_PTR(out_xsv, return EINVAL);
-    CRUDE_ASSERT(delim,   return EINVAL);
+    BRUTE_CHECK_PTR(in_xsv,  return EINVAL);
+    BRUTE_CHECK_PTR(out_xsv, return EINVAL);
+    BRUTE_ASSERT(delim,   return EINVAL);
 
     XSVT_INFO("Input csv : %s", in_xsv);
     XSVT_INFO("Output csv: %s", out_xsv);

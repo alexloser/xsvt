@@ -398,7 +398,7 @@ int xsvt_transform( const char* input, const char* output,  const char* label,
     }
 
     if (err) {
-        CRUDE_LOG(ERROR, "Transform failed");
+        BRUTE_LOG(ERROR, "Transform failed");
     } else {
         XSVT_INFO("Transform finished!");
     }

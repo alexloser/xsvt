@@ -5,15 +5,15 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-#include "crude-log.h"
+#include "brute-log.h"
 
 #ifndef XSVT_LOG
-#define XSVT_DEBUG  CRUDE_DEBUG_V3
-#define XSVT_INFO   CRUDE_INFO_V2
-#define XSVT_WARN   CRUDE_WARN_V2
-#define XSVT_ERROR  CRUDE_ERROR_V2
-#define XSVT_CHKPTR CRUDE_CHECK_PTR
-#define XSVT_ASSERT CRUDE_ASSERT
+#define XSVT_DEBUG  BRUTE_DEBUG_V3
+#define XSVT_INFO   BRUTE_INFO_V2
+#define XSVT_WARN   BRUTE_WARN_V2
+#define XSVT_ERROR  BRUTE_ERROR_V2
+#define XSVT_CHKPTR BRUTE_CHECK_PTR
+#define XSVT_ASSERT BRUTE_ASSERT
 #endif
 
 #ifndef XSVT_INLINE
