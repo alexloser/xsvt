@@ -61,10 +61,12 @@ int main(int argc, char* argv[])
     }
 
     if (!csv) {
-        XSVT_ERROR("Error: can not find csv file path from main arguments!\n");
-        return -1;
+        BRUTE_FATAL_EXIT(-1, "Error: can not find csv file path from main arguments!\n");
     }
 
-    return xsvt_check_file(csv, delim);
+    int err = xsvt_check_file(csv, delim);
+    BRUTE_FATAL_EXIT_IF(err, err, "\n");
+
+    BRUTE_EXIT("\n");
 }
 

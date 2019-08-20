@@ -98,12 +98,11 @@ int main(int argc, char* argv[], char* env[])
 
     err = xsvt_oh_encode(in_csv, out_csv, delim, has_head, write_head);
     if (err) {
-        return err;
-    } else {
-        fprintf(stderr, "Onehot encoding finished, see %s\n\n", out_csv);
-    }
+        BRUTE_FATAL_EXIT(err, "Failed!");
+    } 
 
-    return 0;
+    BRUTE_EXIT("Onehot encoding finished, see %s\n", out_csv);
+
 }
 
 

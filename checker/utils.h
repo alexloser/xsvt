@@ -1,5 +1,6 @@
 #pragma once
 #include <assert.h>
+#include <errno.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -129,9 +130,7 @@ XSVT_INLINE void* xsvt_alloc(size_t nbytes)
 {
     assert(nbytes);
     void* a = calloc(nbytes, 1);
-    if (NULL == a) {
-        XSVT_ERROR("Alloc memory failed: %luB", nbytes);
-    }
+    BRUTE_FATAL_EXIT_IF(a == NULL, ENOMEM, "Alloc memory failed: %luB", nbytes);
     return a;
 }
 
@@ -140,9 +139,7 @@ XSVT_INLINE void* xsvt_realloc(void* p, size_t new_size)
     assert(p);
     assert(new_size);
     void* a = realloc(p, new_size);
-    if (NULL == a) {
-        XSVT_ERROR("Realloc memory failed: %luB", new_size);
-    }
+    BRUTE_FATAL_EXIT_IF(a == NULL, ENOMEM, "Realloc memory failed: %luB", new_size);
     return a;
 }
 

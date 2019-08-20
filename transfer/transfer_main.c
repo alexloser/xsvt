@@ -105,8 +105,11 @@ int main(int argc, char* argv[], char* env[])
     }
 
     int err = xsvt_transform(input, output, label, delim, header, (s2c > 0 ? SVM_TO_CSV : CSV_TO_SVM));
-
-    return err;
+    if (err) {
+        BRUTE_FATAL_EXIT(err, "Failed!");
+    }
+    
+    BRUTE_EXIT("\n");
 }
 
 
