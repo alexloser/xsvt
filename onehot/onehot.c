@@ -15,7 +15,6 @@
 extern FILE* fopen64(const char*, const char*);
 
 
-
 xsvt_oh_coder xsvt_oh_alloc_coder()
 {
     return (xsvt_oh_coder)xsvt_alloc(sizeof(struct __xsvt_oh_coder__));
@@ -31,10 +30,10 @@ void xsvt_oh_init_coder(xsvt_oh_coder c, size_t ncolumns)
     const size_t size = sizeof(void*) * ncolumns;
 
     c->__mb__ = (char*)xsvt_alloc(size * 10);
-    c->__vtypes__   = (int*)          (c->__mb__ + size * 0);
+    c->__vtypes__   = (int*)         (c->__mb__ + size * 0);
     c->__cnames__   = (xsvt_oh_svec) (c->__mb__ + size * 1);
     c->__cnames_ex__= (xsvt_oh_svec) (c->__mb__ + size * 2);
-    c->__nt__       = (size_t*)       (c->__mb__ + size * 3);
+    c->__nt__       = (size_t*)      (c->__mb__ + size * 3);
     c->__dvtable__  = (xsvt_oh_svec*)(c->__mb__ + size * 4);
     c->__01slices__ = (xsvt_oh_svec*)(c->__mb__ + size * 5);
 
@@ -409,9 +408,11 @@ int xsvt_oh_analyze(const xsvt_oh_io io, xsvt_oh_coder c)
     XSVT_INFO("Filesize: %.3fKB", d->fsize / (double)(1024));
     XSVT_INFO("Lines:    %lu", d->nrows);
     XSVT_INFO("Columns:  %lu", d->ncols);
+
     char* errmsg = xsvt_checker_error_msg(d);
     XSVT_INFO("%s", errmsg);
     free(errmsg);
+    
     const size_t ncols = d->ncols;
     xsvt_checker_release(&d);
     if (err != XSVT_CHK_OK) {
