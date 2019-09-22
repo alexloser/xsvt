@@ -7,7 +7,8 @@ CC := gcc -std=gnu99 -D_GNU_SOURCE -D__USE_STRING_INLINES
 CFLAGSd = -I. -I.. -Wall -static-libgcc -m64 -O0 -DDEBUG  -gdwarf-3 -march=x86-64
 
 # for release version
-CFLAGS0 = -I. -I.. -static -static-libgcc -m64 -Ofast -DNDEBUG -g0 -march=native -funroll-loops
+CFLAGS0 = -I. -I.. -static -static-libgcc -m64 -Ofast -minline-stringops-dynamically -DNDEBUG -g0 -march=native
+
 
 all: xsvt_checker xsvt_onehot xsvt_transfer
 	strip -s xsvt.*.x64.*
