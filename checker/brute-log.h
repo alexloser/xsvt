@@ -363,7 +363,7 @@ BRUTE_SNIPPET_END
 #define BRUTE_LOG(level, fmt, ...)  \
 BRUTE_SNIPPET_BEGIN                 \
     __BRUTE_GET_DT__(__brtlg_dt__); \
-    char __crdlg_vfmt__[BRUTE_MAX_FMT<<1];       \
+    char __crdlg_vfmt__[BRUTE_MAX_FMT<<1];                                             \
     strcat(strcat(strcpy(__crdlg_vfmt__, ("%s [" #level "] ")), (fmt)), "\n");         \
     BRUTE_FASTEST_FPRINTF(BRUTE_OSTREAM, __crdlg_vfmt__, __brtlg_dt__, ##__VA_ARGS__); \
 BRUTE_SNIPPET_END
@@ -464,13 +464,30 @@ BRUTE_SNIPPET_END
 ////////////////////// Debugging(but can not be closed) //////////////////////
 //////////////////////////////////////////////////////////////////////////////
 #ifndef  BRUTE_ASSERT
-#define  BRUTE_ASSERT(expr, ...)                       \
-if (!(expr)) {                                         \
-    BRUTE_ERROR_V4("Assertion: `" #expr "` failed!");  \
-    __VA_ARGS__;                                       \
+#define  BRUTE_ASSERT(expr, ...) \
+if (!(expr)) { \
+    fprintf(BRUTE_OSTREAM, "[FATAL] [%s:%d] [%s] Assertion: `" #expr "` failed!", BRUTE_SRC_POS); \
+    __VA_ARGS__; \
+    fflush(BRUTE_OSTREAM); \
+    fclose(BRUTE_OSTREAM); \
+    abort(); \
 }
-#endif// BRUTE_CHKPTR
+#endif// BRUTE_ASSERT
 
+#ifndef  BRUTE_ASSERT_C
+#define  BRUTE_ASSERT_C(expr, ...) \
+if (!(expr)) { \
+    BRUTE_ERROR_V4("Assertion: `" #expr "` failed!"); \
+    __VA_ARGS__; \
+}
+#endif// BRUTE_ASSERT_C
+
+
+#if    __cplusplus >= 201103L
+#ifndef  BRUTE_STATIC_ASSERT
+#define  BRUTE_STATIC_ASSERT(...) static_assert((__VA_ARGS__), #__VA_ARGS__)
+#endif //BRUTE_STATIC_ASSERT
+#endif //c++11
 
 #ifndef  BRUTE_CHECK_PTR
 #define  BRUTE_CHECK_PTR(ptr, ...)                      \
