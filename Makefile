@@ -14,16 +14,16 @@ all: xsvt_checker xsvt_onehot xsvt_transfer
 	strip -s xsvt.*.x64.*
 
 xsvt_checker:
-	$(CC) $(CFLAGSd) checker/*.c -o xsvt.checker.gcc.x64.d
-	$(CC) $(CFLAGS0) checker/*.c -o xsvt.checker.gcc.x64.0
+	$(CC) $(CFLAGSd) checker/*.c -static -o xsvt.checker.gcc.x64.d
+	$(CC) $(CFLAGS0) checker/*.c -static -o xsvt.checker.gcc.x64.0
 
 xsvt_onehot:
-	$(CC) $(CFLAGSd) checker/checker.c onehot/*.c -o xsvt.onehot.gcc.x64.d
-	$(CC) $(CFLAGS0) checker/checker.c onehot/*.c -o xsvt.onehot.gcc.x64.0
+	$(CC) $(CFLAGSd) checker/checker.c onehot/*.c -static -o xsvt.onehot.gcc.x64.d
+	$(CC) $(CFLAGS0) checker/checker.c onehot/*.c -static -o xsvt.onehot.gcc.x64.0
 
 xsvt_transfer:
-	$(CC) $(CFLAGSd) checker/checker.c transfer/*.c -o xsvt.transfer.gcc.x64.d
-	$(CC) $(CFLAGS0) checker/checker.c transfer/*.c -o xsvt.transfer.gcc.x64.0
+	$(CC) $(CFLAGSd) checker/checker.c transfer/*.c -static -o xsvt.transfer.gcc.x64.d
+	$(CC) $(CFLAGS0) checker/checker.c transfer/*.c -static -o xsvt.transfer.gcc.x64.0
 
 clean:
 	rm -rf xsvt.*.x64.*
